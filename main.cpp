@@ -16,10 +16,14 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
     int size = truck_weights.size()/2+1;  //다리 위 트럭들의 이동 거리 배열의 크기
     int *bridge = new int[size];        // 메모리 신경 안쓰고 트럭 개수만큼 줄까하다가 메모리 적게 할 당하는 법 연습하려고 일부러 작은 값으로 줌
     int i;
+    for(i=0; i<size; i++){              //배열 초기화
+      bridge[i] = 0;
+    }
     while(truck_weights.size() == 0){
       if(sum_weight + truck_weights.back() < weight){
         sum_weight += truck_weights.back();             //트럭 무게 추가
         truck_weights.pop_back();                       //올라간 트럭 배열에서 삭제
+
       }
 
 
