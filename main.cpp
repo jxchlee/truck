@@ -8,6 +8,7 @@
 using namespace std;
 
 
+int change_truck(int bridge[], int size);
 
 
 int solution(int bridge_length, int weight, vector<int> truck_weights) {
@@ -44,10 +45,11 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
           }
           if(i == size-1){
             size += 3;
-            for(;i<size;i++){
+            change_truck(bridge, size);
+            
               
-            }
           }
+        
         }
       }
       answer++;                         //한 턴이 지날 때 마다 1초 증가
@@ -64,4 +66,21 @@ int main() {
   vector<int> truck = {7,4,5,6};
 
   solution(leng, weight, truck);
+}
+
+
+
+int change_truck(int bridge[], int size){
+  int *other_truck = new int[size];
+  for(int i=0; i<size-3; i++){
+    other_truck[i] = bridge[i];
+  }
+  for(int i=size-3; i<size; i++){
+    other_truck[i] = 0;
+  }
+
+  bridge = other_truck;
+  
+
+
 }
