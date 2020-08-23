@@ -8,8 +8,6 @@
 using namespace std;
 
 
-void change_truck(int *bridge, int size);
-
 
 int solution(int bridge_length, int weight, vector<int> truck_weights) {
     int answer = 0;
@@ -45,42 +43,47 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
           }
           if(i == size-1){          //마지막 배열까지 0이 없으면(=자리가 없으면) 새롭게 더 넓은 배열을 만든다.
             size += 5;
-            change_truck(bridge, size);
+            int *other_truck = new int[size];
+            for(int i=0; i<size-5; i++){
+              other_truck[i] = bridge[i];
+            }
+            //memcpy(other_truck, bridge, size-5);
+            for(int i=size-5; i<size; i++){
+              other_truck[i] = 0;
+            }          
+            
+            bridge = other_truck;
+            delete[] other_truck;
           }
+          
         }
       }
       answer++;                         //한 턴이 지날 때 마다 1초 증가
       printf("%d\n", truck_weights.back());
-      printf("%dgg\n", sum_weight);
-    }
+      printf("%dgg\n", sum_weight); 
+    }                                     //while문이 끝나면서 segmentation fault 발생
+
+    delete[] bridge;
     answer += bridge_length;
     printf("%d", answer);
+  
     return answer;
 }
 
 
 int main() {
   
-  int leng = 2;
-  int weight = 10;
-  vector<int> truck = {7,4,5,6};
+  int leng = 100;
+  int weight = 100;
+  vector<int> truck = {10,10,10,10,10,10,10,10,10,10};
 
   solution(leng, weight, truck);
-}
 
-
-
-void change_truck(int *bridge, int size){
-  int *other_truck = new int[size];
-  for(int i=0; i<size-5; i++){
-    other_truck[i] = bridge[i];
-  }
-  for(int i=size-3; i<size; i++){
-    other_truck[i] = 0;
-  }
-
-  delete[] bridge;
-
-  bridge = other_truck;
   
+  return 0;
 }
+
+
+
+
+
