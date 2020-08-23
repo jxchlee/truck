@@ -34,16 +34,16 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
       }
       
       if(sum_weight + truck_weights.back() <= weight){
-        sum_weight += truck_weights.back();             //트럭 무게 추가
-        truck.push(truck_weights.back());               //트럭 무게 추가22
+        sum_weight += truck_weights.back();             //트럭 무게 추가(무게합계에 추가)
+        truck.push(truck_weights.back());               //트럭 무게 추가22(큐에 추가)
         truck_weights.pop_back();                       //올라간 트럭 배열에서 삭제
         
         for(i=0; i<size; i++){
-          if(bridge[i] == 0){
+          if(bridge[i] == 0){       //0이 되는 배열이 있다면 새로운 트럭은 여기에 넣고 탈출
             bridge[i]++;
             break;
           }
-          if(i == size-1){
+          if(i == size-1){          //마지막 배열까지 0이 없으면(=자리가 없으면) 새롭게 더 넓은 배열을 만든다.
             size += 3;
             change_truck(bridge, size);
             
