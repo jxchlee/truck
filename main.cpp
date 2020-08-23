@@ -8,7 +8,7 @@
 using namespace std;
 
 
-int change_truck(int bridge[], int size);
+void change_truck(int *bridge, int size);
 
 
 int solution(int bridge_length, int weight, vector<int> truck_weights) {
@@ -25,7 +25,7 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
     while(truck_weights.size() > 0){
       for(i=0; i<size; i++){
         if(bridge[i] != 0){
-          if(++bridge[i]>=bridge_length){   //트럭이 다리를 다 건넜을 경우(새로 들어올 수도 있어서 이미 다리 위에 있는 트럭들 먼저 작업 해줌)
+          if(++bridge[i]>bridge_length){   //트럭이 다리를 다 건넜을 경우(새로 들어올 수도 있어서 이미 다리 위에 있는 트럭들 먼저 작업 해줌)
             bridge[i] = 0;              
             sum_weight -= truck.front();
             truck.pop();
@@ -44,16 +44,16 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
             break;
           }
           if(i == size-1){          //마지막 배열까지 0이 없으면(=자리가 없으면) 새롭게 더 넓은 배열을 만든다.
-            size += 3;
+            size += 5;
             change_truck(bridge, size);
-            
-              
           }
-        
         }
       }
       answer++;                         //한 턴이 지날 때 마다 1초 증가
+      printf("%d\n", truck_weights.back());
+      printf("%dgg\n", sum_weight);
     }
+    answer += bridge_length;
     printf("%d", answer);
     return answer;
 }
@@ -70,17 +70,17 @@ int main() {
 
 
 
-int change_truck(int bridge[], int size){
+void change_truck(int *bridge, int size){
   int *other_truck = new int[size];
-  for(int i=0; i<size-3; i++){
+  for(int i=0; i<size-5; i++){
     other_truck[i] = bridge[i];
   }
   for(int i=size-3; i<size; i++){
     other_truck[i] = 0;
   }
 
+  delete[] bridge;
+
   bridge = other_truck;
   
-
-
 }
