@@ -12,7 +12,7 @@ using namespace std;
 int solution(int bridge_length, int weight, vector<int> truck_weights) {
     int answer = 0;
     int sum_weight=0;                    //다리 위를 지나는 트럭의 무게
-    int size = truck_weights.size()/2+1;  //다리 위 트럭들의 이동 거리 배열의 크기
+    int size = truck_weights.size();  //다리 위 트럭들의 이동 거리 배열의 크기
     int *bridge = new int[size];        // 메모리 신경 안쓰고 트럭 개수만큼 줄까하다가 메모리 적게 할 당하는 법 연습하려고 일부러 작은 값으로 줌
     queue<int> truck;
     
@@ -41,7 +41,7 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
             bridge[i]++;
             break;
           }
-          if(i == size-1){          //마지막 배열까지 0이 없으면(=자리가 없으면) 새롭게 더 넓은 배열을 만든다.
+          /*if(i == size-1){          //마지막 배열까지 0이 없으면(=자리가 없으면) 새롭게 더 넓은 배열을 만든다.
             size += 5;
             int *other_truck = new int[size];
             for(int i=0; i<size-5; i++){
@@ -54,7 +54,7 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
             
             bridge = other_truck;
             delete[] other_truck;
-          }
+          }*/
           
         }
       }
@@ -82,8 +82,3 @@ int main() {
   
   return 0;
 }
-
-
-
-
-
